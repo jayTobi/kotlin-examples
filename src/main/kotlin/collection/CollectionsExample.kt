@@ -1,3 +1,5 @@
+package collection
+
 import strings.DEFAULT_ELEMENT_SEPARATOR
 import strings.joinToString
 import strings.joinToString as join //an alias can be used and sometimes must be used to avoid name collisions
@@ -7,6 +9,7 @@ import strings.joinToString as join //an alias can be used and sometimes must be
 fun main(args: Array<String>) {
     simpleCollectionCreation()
     callingTopLevelFunctions()
+    selfDefinedExtensionFunction()
 }
 
 /**
@@ -32,6 +35,9 @@ fun simpleCollectionCreation() {
     println("Max value in list: $max")
 }
 
+/**
+ * Function for calling top-level function with different (and default) parameters.
+ */
 fun callingTopLevelFunctions() {
     val list = listOf(1, 3, 9, 11)
     println("Calling the top level function with all default parameters ${joinToString(list)}")
@@ -39,4 +45,14 @@ fun callingTopLevelFunctions() {
     println("Using a different separator ${join(list, DEFAULT_ELEMENT_SEPARATOR)}")
     //DEFAULT_ELEMENT_SEPARATOR is a top level property
     //if the order of the parameter is kept, it's not necessary to provide the names
+}
+
+/**
+ * Function calling an extension function that we directly assigned to Collection types.
+ */
+fun selfDefinedExtensionFunction() {
+    val list = listOf(12, 44, 99, 9)
+    println("List as string ${list.joinToString(separator = ": ")}")
+    //same functionality as in collection.callingTopLevelFunctions, but the collection is no parameter
+    //we added the function to the collection class itself
 }
