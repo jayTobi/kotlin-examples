@@ -1,5 +1,12 @@
+import strings.DEFAULT_ELEMENT_SEPARATOR
+import strings.joinToString
+import strings.joinToString as join //an alias can be used and sometimes must be used to avoid name collisions
+
+//imports needed for using the top-level functions/properties because they reside in different package
+
 fun main(args: Array<String>) {
     simpleCollectionCreation()
+    callingTopLevelFunctions()
 }
 
 /**
@@ -20,7 +27,16 @@ fun simpleCollectionCreation() {
 
     //last() is an example for an extension function defined on any Iterable, e.g a Set in Java misses this method
     val lastSetElement = set.last()
-    println("last set element: $lastSetElement")
+    println("Last set element: $lastSetElement")
     val max = list.max()
-    println("max in list: $max")
+    println("Max value in list: $max")
+}
+
+fun callingTopLevelFunctions() {
+    val list = listOf(1, 3, 9, 11)
+    println("Calling the top level function with all default parameters ${joinToString(list)}")
+    println("Some named parameters provided ${joinToString(list, prefix = "[", postfix = "]")}")
+    println("Using a different separator ${join(list, DEFAULT_ELEMENT_SEPARATOR)}")
+    //DEFAULT_ELEMENT_SEPARATOR is a top level property
+    //if the order of the parameter is kept, it's not necessary to provide the names
 }
